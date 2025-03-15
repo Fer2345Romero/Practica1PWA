@@ -1,0 +1,45 @@
+﻿@model Conversiones
+@{
+    ViewData["Title"] = "Conversiones";
+}
+
+<div class="row">
+    <div class="col-6 mx-auto">
+        <form asp-controller="Conversiones" asp-action="Index" method="post">
+            <div class="card">
+                <div class="card-header">
+                    Conversión de Unidades
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-label">Valor a Convertir</label>
+                        <input asp-for="ValorConversion" class="form-control" placeholder="Ingresa el valor" />
+                        <span asp-validation-for="ValorConversion" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Tipo de Conversión</label>
+                        <select asp-for="TipoConversionId" class="form-control">
+                            <option value="0">Seleccione una opción</option>
+                            @foreach (var conversion in Model.ListaConversiones)
+                            {
+                                <option value="@conversion.Id">@conversion.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoConversionId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Convertir</button>
+                </div>
+            </div>
+        </form>
+
+        @if (Model.ResultadoConversion != 0)
+        {
+            <div class="alert alert-success mt-4">
+                <strong>Resultado:</strong> @Model.ResultadoConversion
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿
+@{
+	ViewData["Title"] = "Calculadora";
+}
+
+@model Operaciones
+<div class="row">
+	<div class="col-6 n-auto">
+		<form asp-controller="Calculadora" asp-action="Index" method="post">
+			<div class="card">
+				<div class="card-header">
+					Calculadora
+				</div>
+
+				<div class="card-body">
+					<div class="mb-2">
+						<label class="form-label">Primer Dato</label>
+						<input asp-for="PrimerDato" class="form-control" placeholder="Ingresa el primer dato" />
+					</div>
+
+					<div class="mb-2">
+						<label class="form-label">Segundo Dato</label>
+						<input asp-for="SegundoDato" class="form-control" placeholder="Ingresa el segundo dato" />
+					</div>
+
+					<div class="mb-2">
+						<label class="form-label">Operacion</label>
+						<select asp-for="TipoOperacionId" class="form-control">
+							@foreach (var operacion in Model.ListaOperaciones)
+							{
+								<option value="@operacion.Id">@operacion.Nombre</option>
+							})
+
+						</select>
+					</div>
+				</div>
+				<div class=" card-footer">
+					<button type="submit" class="btn btn-primary">Procesar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6 n-auto">
+		@if (Model is not null)
+		{
+			<div class="alert alert-primary mt-4">
+				@Model.Resultado
+			</div>
+		}
+	</div>
+</div>
+
+
+
